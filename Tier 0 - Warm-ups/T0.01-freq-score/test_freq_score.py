@@ -27,9 +27,10 @@ from bigram_maker import (
 )
 
 # --- configuration ----------------------------------------------------------
-# Adjust these two paths if your corpus or model file lives elsewhere.
-CORPUS = Path("/Users/kennethokiria/Downloads/734e32aab75a4f7df06538dac9f00a5a-8da85d5acabc53fd66af17c252701b0ba395e6c1/moby.txt")
-MODEL  = Path("/Users/kennethokiria/Documents/moby_bigram.json")
+# Both files live alongside this test in the project folder, so we resolve
+# them relative to __file__ — works regardless of where the repo is cloned.
+CORPUS = Path(__file__).parent / "moby.txt"
+MODEL  = Path(__file__).parent / "moby_bigram.json"
 
 
 def setup():
