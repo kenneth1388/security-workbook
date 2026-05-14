@@ -1,0 +1,31 @@
+# TEST DATA — NOT REAL IOCS
+# Catch-all: duplicates from other files (to verify dedup) plus near-misses
+# specifically designed to stress-test loose regexes.
+
+Misc clipboard contents from compromised workstation, 2026-04-16:
+
+http://boamerica-secure.example/verify?id=8472
+https://boamerica-secure.example/verify?id=8473
+https://boamerica-verify.test/login
+192.0.2.45
+203.0.113.42
+new-attacker.example
+phishing.test
+
+Hash candidates pasted from chat:
+  e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  ZZZINVALIDHASHXXXNOTHEXATALL
+
+Stray notes mentioning function.method() and project.config which look
+domain-shaped but are programming syntax. A tight regex should ignore both.
+
+The version number 1.2.3.4 also appears here — four numeric segments but
+clearly not an IP. A loose IP regex will incorrectly match it.
+
+# Notes for whoever runs find_iocs against this file:
+# - Several entries duplicate things in other files (192.0.2.45,
+#   boamerica-secure.example URLs, etc.). After running find_iocs on the
+#   whole directory, each indicator should appear EXACTLY ONCE per type.
+# - "ZZZINVALIDHASHXXXNOTHEXATALL" must be rejected (not hex).
+# - "function.method", "project.config", "1.2.3.4" are the false-positive
+#   traps. Tight regex catches them; loose regex doesn't.

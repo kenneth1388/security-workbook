@@ -1,0 +1,31 @@
+# TEST DATA — NOT REAL IOCS
+# RFC 5737 IPs (192.0.2.x, 198.51.100.x, 203.0.113.x) and RFC 2606 TLDs
+# (.example, .test, .invalid) are reserved for documentation/testing.
+# Hashes are randomly generated — they do not correspond to real malware.
+
+From: "Bank of America" <security@boamerica-secure.example>
+Reply-To: support@boamerica-secure.example
+To: victim@example.com
+Subject: Urgent: Verify your account
+Date: Mon, 15 Apr 2026 14:23:10 +0000
+
+Dear Customer,
+
+Your account has been suspended due to suspicious activity. To restore
+access, please verify your identity immediately:
+
+  http://boamerica-secure.example/verify?id=8472
+
+If you do not verify within 24 hours, your account will be permanently
+closed. Click the link above or visit:
+
+  https://boamerica-verify.test/login
+
+Sender IP recorded: 192.0.2.45
+Mail server: 198.51.100.12
+
+Attached: account_statement.pdf
+Attachment SHA256: a3f5b9c7e8d4f2a1b6c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d0e9f8a7
+
+Sincerely,
+"Bank Security Team"

@@ -1,0 +1,23 @@
+# TEST DATA — NOT REAL IOCS
+# Synthetic firewall log mixing RFC-reserved IPs, RFC-reserved domain TLDs,
+# and intentional near-misses your regex must reject.
+
+2026-04-16T08:14:22Z BLOCK src=192.0.2.45 dst=10.0.0.5 proto=tcp dport=443
+2026-04-16T08:14:23Z BLOCK src=192.0.2.45 dst=10.0.0.5 proto=tcp dport=443
+2026-04-16T08:15:01Z ALLOW src=10.0.0.42 dst=203.0.113.7 proto=tcp dport=80
+2026-04-16T08:15:02Z ALLOW src=10.0.0.42 dst=203.0.113.7 proto=tcp dport=80
+2026-04-16T08:16:33Z ALERT possible scan from 192.0.2 — partial address logged
+2026-04-16T08:17:11Z BLOCK src=198.51.100.12 dst=10.0.0.5 proto=tcp dport=25
+2026-04-16T08:18:05Z DNS query: c2.contigang.test resolved to 203.0.113.99
+2026-04-16T08:18:06Z DNS query: command.attacker.invalid resolved to 198.51.100.99
+2026-04-16T08:19:42Z BLOCK src=999.999.999.999 (malformed src — log corruption)
+2026-04-16T08:20:15Z DROP packet from 192.0.2.45 to internal_host
+
+# Notes for whoever runs find_iocs against this file:
+# - "192.0.2"        on the ALERT line is a partial IP — should NOT match.
+# - "999.999.999.999" is syntactically four octets but each is out-of-range
+#   (>255). A strict regex should reject it; a loose one will let it through.
+#   Decide which behaviour you want.
+# - "10.0.0.x" addresses are RFC 1918 private — included only as src/dst
+#   noise. They are technically valid IPv4 addresses; whether they "count"
+#   as IOCs depends on how you scope the function.
